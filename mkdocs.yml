@@ -1,0 +1,128 @@
+site_name: Knowledge Base de Programação
+site_description: Base de conhecimento completa para desenvolvimento de software — Fundamentos, Paradigmas, Algoritmos, Internals de Linguagem, Concorrência e Sistemas Distribuídos
+site_author: DevOps Lead
+site_url: https://github.com/seu-usuario/knowledge-base
+
+repo_name: knowledge-base
+repo_url: https://github.com/seu-usuario/knowledge-base
+edit_uri: edit/main/docs/
+
+copyright: © 2026 Knowledge Base Team
+
+theme:
+  name: material
+  language: pt
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Modo escuro
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Modo claro
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - toc.integrate
+
+plugins:
+  - search:
+      lang: pt
+  - git-revision-date-localized:
+      type: date
+      locale: pt
+      fallback_to_build_date: true
+  - minify:
+      minify_html: true
+  - glightbox
+  - macros
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/seu-usuario/knowledge-base
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/seu_usuario
+  generator: false
+  version:
+    provider: mike
+
+nav:
+  - Início: index.md
+  - Fundamentos:
+      - Visão Geral: fundamentals/concept.md
+      - Implementações: fundamentals/implementation.md
+      - Trade-offs: fundamentals/tradeoffs.md
+      - Fronteiras: fundamentals/frontiers.md
+      - Exercícios: fundamentals/exercises.md
+  - Paradigmas:
+      - Visão Geral: paradigms/concept.md
+  - Algoritmos:
+      - Visão Geral: algorithms/concept.md
+  - Internals de Linguagem:
+      - Visão Geral: language-internals/concept.md
+  - Concorrência:
+      - Visão Geral: concurrency/concept.md
+  - Workflow de Skills:
+      - Guia Rápido: skills/workflow.md
+      - Referência de Arquivos: skills/reference.md
+      - Trilhas de Aprendizado: skills/learning_paths.md
+  - Sobre:
+      - Princípios: about/principles.md
+      - Fases Futuras: about/future_phases.md
+      - Manutenção: about/maintenance.md

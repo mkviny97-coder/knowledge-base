@@ -1,0 +1,138 @@
+name: Deploy Documentation to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Required for git-revision-date-localized-plugin
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install mkdocs-material==9.5.27 \
+            mkdocs-git-revision-date-localized-plugin==1.2.2 \
+            mkdocs-minify-plugin==0.8.0 \
+            mkdocs-macros-plugin==1.2.0 \
+            pymdown-extensions==10.6 \
+            mkdocs-glightbox==0.4.1
+
+      - name: Build Documentation
+        run: mkdocs build --strict --verbose
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install link checker
+        run: pip install mkdocs-material lychee
+
+      - name: Build docs
+        run: mkdocs build --strict
+
+      - name: Check links
+        run: lychee --verbose --max-concurrency 10 site/**/*.html
+        continue-on-error: true
+
+  spell-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install spell checker
+        run: pip install codespell
+
+      - name: Run codespell
+        run: codespell docs/ --skip="*.bib,references.bib" --ignore-words=.codespellignore
+        continue-on-error: true
+
+  validate-nav:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install MkDocs
+        run: pip install mkdocs-material
+
+      - name: Validate nav structure
+        run: |
+          python -c "
+          import yaml
+          with open('mkdocs.yml') as f:
+              config = yaml.safe_load(f)
+
+          def check_nav(nav, prefix=''):
+              for item in nav:
+                  if isinstance(item, dict):
+                      for key, value in item.items():
+                          if isinstance(value, str) and value.endswith('.md'):
+                              import os
+                              path = 'docs/' + value
+                              if not os.path.exists(path):
+                                  print(f'MISSING: {path} (referenced in nav)')
+                          elif isinstance(value, list):
+                              check_nav(value, prefix + key + ' > ')
+
+          check_nav(config.get('nav', []))
+          print('Navigation validation complete')
+          "

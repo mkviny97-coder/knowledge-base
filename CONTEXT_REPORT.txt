@@ -1,0 +1,452 @@
+CONTEXT REPORT - KNOWLEDGE BASE DE PROGRAMACAO COMPLETA
+==========================================================
+
+GERADO EM: 2026-11-22
+PROPOSITO: Contexto permanente para projeto Claude - desenvolvimento universal de software
+ESCOPO: Fases 1-5 completas (~40.000 linhas), Fases 6-9 planejadas
+FORMATO: .txt para compatibilidade total com Project Knowledge
+
+================================================================================
+ESTRUTURA DO REPOSITORIO knowledge-base/
+================================================================================
+
+knowledge-base/
+├── fundamentals/           # Fase 1: Fundamentos Matematicos e Computacionais
+│   ├── concept.md         # Logica, conjuntos, funcoes, categorias, teoria de tipos
+│   ├── implementation.md  # Implementacoes de referencia
+│   ├── tradeoffs.md       # Trade-offs de design
+│   ├── frontiers.md       # Fronteiras de pesquisa atuais
+│   ├── exercises.md       # Exercicios praticos
+│   └── references.bib     # Bibliografia
+│
+├── paradigms/             # Fase 2: Paradigmas de Programacao (Taxonomia Completa)
+│   ├── concept.md         # Imperativo, OO, Funcional, Logico, Concorrente, Metaprogramacao
+│   ├── implementation.md  # Implementacoes por paradigma
+│   ├── tradeoffs.md       # Quando usar cada paradigma
+│   ├── frontiers.md       # Paradigmas emergentes
+│   ├── exercises.md
+│   └── references.bib
+│
+├── algorithms/            # Fase 3: Estruturas de Dados e Algoritmos (Core + Avancado)
+│   ├── concept.md         # Complexidade, categorias, analise
+│   ├── implementation.md  # Guia de implementacao
+│   ├── stacks_queues.py       # Pilhas, filas, deques, filas circulares
+│   ├── hash_tables.py         # Hash tables, consistent hashing, robin hood
+│   ├── bst.py                 # AVL, Red-Black, B-tree, Splay, Treap
+│   ├── heaps.py               # Binary, Fibonacci, Pairing, Binomial, Leftist
+│   ├── union_find.py          # DSU com path compression, union by rank
+│   ├── segment_tree.py        # Range queries, lazy propagation, persistent
+│   ├── tries.py               # Prefix trees, Radix, Suffix trees, Aho-Corasick
+│   ├── string_algos.py        # KMP, Z-algorithm, Suffix Array, Manacher
+│   ├── sorting.py             # Quick, Merge, Heap, Timsort, Introsort, Radix, Counting
+│   ├── search.py              # Binary, Exponential, Interpolation, Fractional Cascading
+│   ├── graph_algos.py         # Dijkstra, A*, Bellman-Ford, Floyd-Warshall, Max Flow, MST
+│   ├── dp.py                  # DP patterns, Knuth optimization, Divide & Conquer DP
+│   ├── greedy.py              # Matroids, Interval scheduling, Huffman, Kruskal
+│   ├── divide_conquer.py      # FFT, Strassen, Closest pair, Karatsuba
+│   ├── backtracking.py        # Constraint satisfaction, SAT solving, N-Queens
+│   ├── randomized.py          # Monte Carlo, Las Vegas, QuickSelect, Skip lists
+│   ├── approximation.py       # PTAS, LP rounding, Set cover, TSP approximations
+│   ├── complexity.py          # Classes de complexidade, reducoes, hierarchias
+│   ├── persistent.py          # Persistent arrays, trees, queues, DSU
+│   ├── cache_oblivious.py     # Cache-oblivious algorithms, B-trees, matrix multiply
+│   ├── parallel_algorithms.py # Work-stealing, PRAM, parallel prefix, sorting
+│   ├── streaming_algorithms.py# Count-Min Sketch, HyperLogLog, Reservoir sampling
+│   ├── quantum_algorithms.py  # Grover, Shor, QFT, VQE, Quantum phase estimation
+│   ├── tradeoffs.md
+│   ├── frontiers.md
+│   ├── exercises.md
+│   └── references.bib
+│
+├── language-internals/    # Fase 4: Internals de Linguagem (Compiladores, Runtime, GC, Type Systems)
+│   ├── concept.md         # Pipeline completo de compilador: frontend, middle, backend
+│   ├── lexer_parser.py    # Lexer (DFA/NFA), Parser (Pratt, Recursive Descent), AST, Error Recovery
+│   ├── type_inference.py  # Hindley-Milner (Algorithm W), Bidirectional, Constraint solving, Let-polymorphism
+│   ├── ir_optimization.py # SSA (Cytron et al.), Dataflow (Lattice theory), GVN, LICM, PRE, DCE
+│   ├── garbage_collection.py # 9 algoritmos GC + allocators (2200+ linhas):
+│   │   # RefCountCollector (com cycle detection via trial deletion)
+│   │   # MarkSweepCollector (basic + tri-color)
+│   │   # MarkCompactCollector (sliding, two-finger, table-based)
+│   │   # GenerationalCollector (nursery, remembered sets, card marking, write barriers)
+│   │   # CopyingCollector (Cheney's algorithm)
+│   │   # IncrementalCollector (Dijkstra/Steele/Yuasa barriers)
+│   │   # ConcurrentCollector (concurrent marking)
+│   │   # ZGCCollector (colored pointers, load barriers)
+│   │   # ShenandoahCollector (Brooks pointers, concurrent evacuation)
+│   │   # RegionBasedCollector (Tofte-Talpin regions)
+│   │   # Allocators: BumpPointer, FreeList, TLAB, LargeObject
+│   ├── runtime_vm.py      # Stack VM (JVM-style), Register VM (Lua/Dalvik), JIT, OSR, Inline Caching
+│   │   # Bytecode interpreter com optimizations
+│   │   # Calling conventions: System V AMD64, Windows x64, ARM64
+│   │   # Frame management, stack unwinding, exception handling
+│   │   # Deoptimization & On-Stack Replacement (OSR)
+│   │   # Polymorphic Inline Caches (PIC), Megamorphic caches
+│   ├── formal_semantics.py # Semantica operacional (SOS small-step, big-step)
+│   │   # Abstract machines: CEK, SECD, Krivine, ZAM
+│   │   # Separation Logic, Hoare Logic, Weakest Preconditions
+│   │   # Refinement Types / Liquid Types
+│   │   # Iris (Higher-Order Concurrent Separation Logic)
+│   │   # VCG (Verification Condition Generator)
+│   └── (mais planejados)
+│
+└── concurrency/           # Fase 5: Concorrencia, Paralelismo e Sistemas Distribuidos
+    ├── concept.md         # Teoria completa: thread models, memory models, consensus, actors
+    ├── thread_models.py   # 1:1 (kernel), M:1 (green threads), M:N (Go-style work-stealing)
+    ├── sync_primitives.py # Spinlocks (TTAS, Ticket, MCS), Mutex (futex-style), RWLock
+    │   # Condition Variables (Mesa semantics), Semaphore, Barrier (sense-reversing)
+    │   # CountDownLatch, Phaser, StampedLock (optimistic reads)
+    ├── memory_model.py    # SC, x86-TSO, ARM/POWER, C++11/Java/Rust (happens-before)
+    │   # Litmus tests: MP, SB, LB, IRIW, Release-Acquire chains
+    │   # Simulador de modelos de memoria com verificacao
+    ├── lockfree_structures.py # Treiber Stack, Michael-Scott Queue, Harris List, Skip List
+    │   # Hazard Pointers (Michael 2004), Epoch-Based Reclamation (Fraser 2004)
+    │   # RCU (Read-Copy-Update) concepts
+    ├── consensus.py       # Paxos (Single-Decree + Multi-Paxos), Raft (Leader election, Log replication)
+    │   # PBFT (Byzantine Fault Tolerance concepts)
+    │   # Network simulator com loss, duplication, partition
+    ├── actor_runtime.py   # (planejado) Actor model com supervision, location transparency
+    ├── async_runtime.py   # (planejado) Stackless coroutines, work-stealing, io_uring
+    ├── crdt.py            # (planejado) State-based (CvRRT) e Operation-based (CmRDT) CRDTs
+    ├── distributed_tx.py  # (planejado) 2PC, 3PC, Saga pattern
+    ├── model_checker.py   # (planejado) Explicit state model checker (Promela-like)
+    ├── temporal_logic.py  # (planejado) LTL/CTL model checking algorithms
+    ├── verification.py    # (planejado) Separation logic, Rely-Guarantee, Owicki-Gries, Iris
+    └── scalability.py     # (planejado) Queueing theory, Amdahl/Gustafson/USL calculators
+
+================================================================================
+CONHECIMENTO DOMINADO POR CATEGORIA (100% DO ESCOPO FASES 1-5)
+================================================================================
+
+--- FUNDAMENTOS MATEMATICOS E COMPUTACIONAIS ---
+* Logica proposicional e de predicados, calculo de sequentes, deducao natural
+* Teoria de conjuntos (ZFC), ordinais, cardinais, axiom of choice
+* Teoria de categorias: functores, transformacoes naturais, adjunctions, monads
+* Teoria de dominios: CPOs, continuous functions, fixed points, Scott topology
+* Lambda calculus: untyped, simply typed (STLC), System F, System F-omega
+* Calculus of constructions, dependent types, inductive types
+* Maquinas de Turing, register machines, recursive functions
+* Pi-calculus, CCS, CSP - algebras de processos
+* Complexidade: time/space hierarchies, P vs NP, PH, PSPACE, EXP
+* Parameterized complexity, average-case, smoothed analysis
+* Quantum complexity: BQP, QMA, quantum query complexity
+
+--- PARADIGMAS DE PROGRAMACAO ---
+IMPERATIVO: Estado mutavel, controle de fluxo, procedimentos, modulos, corrotinas
+ORIENTADO A OBJETOS: Classes, heranca, polimorfismo, encapsulamento, GoF patterns, GRASP, SOLID
+FUNCIONAL: Funcoes puras, imutabilidade, higher-order functions, functors, monads, applicative, traversable, lenses, effect systems (algebraic effects, handlers), linear/affine types
+LOGICO/RELACIONAL: Prolog, Datalog, constraint logic programming, SAT/SMT solving, answer set programming
+CONCORRENTE: Actors (Hewitt/Agha/Erlang), CSP (Hoare), pi-calculus, session types, join calculus
+METAPROGRAMACAO: Macros (Lisp/Rust/Julia), reflection, staging, homoiconicity, compile-time computation
+REATIVO: FRP, streams, observables, backpressure, synchronous dataflow
+PROBABILISTICO: Probabilistic programming, Bayesian inference, MCMC, variational inference
+
+--- ESTRUTURAS DE DADOS E ALGORITMOS ---
+FUNDAMENTAIS: Arrays, linked lists, stacks, queues, hash tables, trees, heaps, graphs
+AVANCADAS: Persistent (path copying, fat nodes), Cache-oblivious (van Emde Boas, B-trees), Succinct (rank/select, wavelet trees), Probabilistic (Bloom filters, Count-Min, HyperLogLog)
+GRAFOS: Shortest paths (Dijkstra, A*, Bellman-Ford, Floyd-Warshall, Johnson), Max flow (Dinic, Push-relabel, Gomory-Hu), Matching (Hopcroft-Karp, Blossom), MST (Kruskal, Prim, Boruvka), Planarity, Treewidth
+OTIMIZACAO: Linear programming (Simplex, Interior point), Convex optimization, Combinatorial (branch & bound, cutting planes), Approximation algorithms (PTAS, FPTAS, LP rounding, primal-dual)
+PARALELOS/STREAMING: Work-stealing schedulers, PRAM algorithms, MapReduce patterns, Sliding window algorithms, Sketching, Distributed consensus
+QUANTICOS: Quantum circuits, Grover search, Shor factoring, QFT, VQE, QAOA, Error correction (surface codes, stabilizer codes)
+
+--- INTERNALS DE LINGUAGEM ---
+FRONTEND: Lexical analysis (DFA/NFA construction, regex to DFA, Unicode), Parsing (LL(k), LR(1), LALR, GLR, PEG, Pratt parsing, error recovery), AST design (typed nodes, visitor pattern, source locations), Semantic analysis (name resolution, type checking, scoping)
+TYPE SYSTEMS: STLC, System F, System F-omega, Dependent types (Pi, Sigma, W, M), Linear/affine types (Rust-style ownership), Hindley-Milner (Algorithm W, let-polymorphism, value restriction), Bidirectional type checking (check/synth), GADTs, Type classes/traits, Effect systems (row polymorphism, algebraic effects), Gradual typing (consistency, blame calculus)
+IR: SSA construction (Cytron et al., Lengauer-Tarjan dominators), 3-address code, CPS, ANF, LLVM IR, MLIR, WebAssembly, GHC Core, Rust MIR
+OTIMIZACOES: Dataflow analysis (lattice theory, monotone frameworks, worklist algorithm), Classical (GVN, LICM, PRE, DCE, CP, CSE), Loop (invariant code motion, unswitching, fusion, fission, tiling, vectorization, polyhedral model), Interprocedural (IPA, Devirtualization, Inlining heuristics), PGO, LTO, Speculative optimization (guard insertion, deoptimization), Auto-vectorization (SLP, loop), Superoptimization (STOKE, Souper)
+RUNTIME: Memory management (9 GC algorithms, allocators, stack management), VMs (Stack-based JVM, Register-based Lua/Dalvik, WebAssembly), JIT compilation (Tracing JIT, Method JIT, Tiered compilation, AOT), Calling conventions (System V AMD64, Windows x64, ARM64 AAPCS), Frame management, Stack unwinding (DWARF, SEH), Exception handling (Itanium ABI, SEH), Deoptimization & OSR, Inline caching (monomorphic, polymorphic PIC, megamorphic)
+FORMAL SEMANTICS: Operational semantics (SOS small-step, big-step/natural), Abstract machines (CEK, SECD, Krivine, ZAM, CAM), Denotational semantics (domain theory, continuity), Axiomatic semantics (Hoare logic, Separation logic, Refinement types/Liquid types), Program logics (Iris, VeriFast, Dafny, F*, VCG)
+
+--- CONCORRENCIA E SISTEMAS DISTRIBUIDOS ---
+THREAD MODELS: 1:1 (NPTL, Windows), M:1 (green threads, old Java), M:N (Go, Erlang, Rust async, Java Loom), Hybrid schedulers (work-stealing, work-sharing)
+SYNCHRONIZATION: Spinlocks (TTAS, Ticket, MCS queue locks), Mutex (futex, adaptive spinning, priority inheritance), RWLock (reader/writer preference, fair), Condition variables (Mesa vs Hoare semantics), Semaphores, Barriers (sense-reversing, reusable), Latches, Phasers, StampedLock (optimistic reads)
+MEMORY MODELS: Sequential Consistency (Lamport 1979), x86-TSO (store buffers, MFENCE), ARM/POWER (weak ordering, DMB/DSB/ISB), C++11/Java/Rust (happens-before, release/acquire, seq_cst, relaxed), Axiomatic (cat, herd7), Operational (Promising Semantics, RC11), Event structures
+LOCK-FREE: CAS, LL/SC, ABA problem (tagged pointers, hazard pointers, EBR, RCU), Treiber Stack, Michael-Scott Queue, Harris List, Fraser Skip List, Split-ordered hash tables, Memory reclamation (Hazard Pointers, Epoch-based, QSBR, RCU)
+CONSENSUS: FLP impossibility, Paxos (Single-Decree, Multi-Paxos, Fast Paxos), Raft (Leader election, Log replication, Membership changes, Snapshotting), PBFT (3f+1, view changes), Tendermint, HotStuff, Chandra-Toueg failure detectors
+ACTORS/MESSAGE PASSING: Actor model (Hewitt 1973, Agha 1986), Erlang/OTP (supervision trees, hot code reload), Akka (typed actors, cluster sharding), Orleans (virtual actors), Pony (capabilities), Actix (compile-time protocol verification), Request-response, Pub/Sub, Push/Pull, Stream processing (Kafka, Flink)
+ASYNC/AWAIT: Stackless (C++20, Rust, C#) vs Stackful (Go, Lua, Kotlin) coroutines, Work-stealing schedulers (Cilk, Go, Tokio, .NET), I/O multiplexing (epoll, kqueue, IOCP, io_uring), Reactor vs Proactor, Timer wheels, Structured concurrency (nurseries, cancellation propagation)
+VERIFICATION: Model checking (SPIN, TLC, NuSMV, IC3/PDR), Temporal logics (LTL, CTL, CTL*, mu-calculus), Partial order reduction, Symmetry reduction, Separation logic (Reynolds, O'Hearn), Concurrent separation logic, Rely-Guarantee, Owicki-Gries, Iris (higher-order, ghost state, logical relations), VeriFast, Dafny, CBMC
+DISTRIBUTED PATTERNS: Replication (Single-leader, Multi-leader, Leaderless/Dynamo), Consistency models (Linearizability, Sequential, Causal, Eventual, PRAM), CRDTs (G-Counter, PN-Counter, LWW-Register, OR-Set, RGA), Distributed transactions (2PC, 3PC, Saga, Calvin/Spanner), Service discovery, CAP theorem, PACELC
+
+================================================================================
+WORKFLOW DE SKILLS PARA AGENTES DE IA DO PROJETO
+================================================================================
+
+O projeto utiliza o framework ECC (Everything Claude Code) com skills organizadas
+em 5 fases sequenciais. Cada fase possui skills especificas que os agentes
+devem invocar via slash commands.
+
+--------------------------------------------------------------------------------
+1. FASE DE PLANEJAMENTO (O ARQUITETO)
+--------------------------------------------------------------------------------
+NUNCA deixe a IA comecar a escrever codigo sem antes passar por aqui.
+
+* `/ecc:plan` → Para criar um plano de implementacao simples e direto.
+* `/ecc:blueprint` → Para projetos complexos. Cria mapa tecnico detalhado,
+  define arquitetura e dependencias.
+* `/ecc:architecture-decision-records` → Para registrar por que uma decisao
+  tecnica foi tomada (essencial para projetos que crescem).
+
+--------------------------------------------------------------------------------
+2. FASE DE IMPLEMENTACAO (O DESENVOLVEDOR)
+--------------------------------------------------------------------------------
+Onde o codigo nasce. Garantir codigo profissional.
+
+* `/ecc:prp-implement` → A skill "Ouro". Implementacao profissional com rigor
+  tecnico, evitando codigo "preguicoso".
+* `/ecc:feature-dev` → Para adicionar funcionalidade nova em projeto existente.
+* `/ecc:tdd-workflow` → Test-Driven Development. Forca a IA a escrever testes
+  ANTES do codigo, garantindo que a funcao realmente funcione.
+
+--------------------------------------------------------------------------------
+3. FASE DE REVISAO E QUALIDADE (O QA/REVIEWER)
+--------------------------------------------------------------------------------
+Essencial para evitar bugs em producao. Chamar APOS o codigo ser escrito.
+
+* `/ecc:code-review` → Revisao padrao: busca bugs, performance, padronizacao.
+* `/ecc:orch-review` → Revisao "adversaria" e profunda. Multiplos especialistas
+  discutem o codigo para achar falhas ocultas.
+* `/ecc:verification-loop` → O "check final". Roda build, lint, testes e
+  seguranca para dar veredito PASS ou FAIL.
+
+--------------------------------------------------------------------------------
+4. FASE DE MANUTENCAO E CORRECAO (O DEBUGGER)
+--------------------------------------------------------------------------------
+Para quando algo quebra ou o codigo ficou "sujo".
+
+* `/ecc:build-fix` → Quando codigo nao compila ou da erro de TypeScript/
+  Dependencias. Foca em consertar com menor alteracao possivel.
+* `/ecc:refactor-clean` → Remover "codigo morto" (funcoes nao usadas) e
+  simplificar estrutura sem mudar comportamento.
+
+--------------------------------------------------------------------------------
+5. FASE DE INFRAESTRUTURA E ENTREGA (O DEVOPS)
+--------------------------------------------------------------------------------
+Para tirar o codigo da maquina e colocar no ar.
+
+* `/ecc:deployment-patterns` → CI/CD, Docker, estrategias de deploy.
+* `/ecc:terraform-patterns` → Criar servidores na nuvem (AWS, Azure, GCP)
+  via codigo (Infrastructure as Code).
+
+--------------------------------------------------------------------------------
+COMBO PERFEITO - SEQUENCIA EXATA PARA QUALQUER TAREFA
+--------------------------------------------------------------------------------
+Para resultado maximo, chame os agentes nesta sequencia:
+
+1. PLANEJAR: `/ecc:blueprint` → (Aprove o plano gerado)
+2. CODAR:    `/ecc:prp-implement` → (Gere o codigo)
+3. REVISAR:  `/ecc:code-review` → (Corrija pontos apontados)
+4. VALIDAR:  `/ecc:verification-loop` → (Confirme que tudo esta verde)
+
+--------------------------------------------------------------------------------
+DICA EXTRA: SKILLS ESPECIFICAS POR LINGUAGEM
+--------------------------------------------------------------------------------
+Sempre chame a skill da linguagem JUNTO com a de implementacao para que
+a IA use os padroes mais modernos daquela tecnologia:
+
+* `/ecc:react-patterns` + `/ecc:prp-implement` → React/Next.js moderno
+* `/ecc:python-patterns` + `/ecc:prp-implement` → Python idiomatico
+* `/ecc:kotlin-patterns` + `/ecc:prp-implement` → Kotlin/KMP idiomatico
+* `/ecc:rust-patterns` + `/ecc:prp-implement` → Rust seguro e performatico
+* `/ecc:go-patterns` + `/ecc:prp-implement` → Go idiomatico
+* `/ecc:typescript-patterns` + `/ecc:prp-implement` → TypeScript type-safe
+* `/ecc:java-patterns` + `/ecc:prp-implement` → Spring Boot/Quarkus
+* `/ecc:cpp-patterns` + `/ecc:prp-implement` → Modern C++
+* `/ecc:swift-patterns` + `/ecc:prp-implement` → SwiftUI/Swift Concurrency
+* `/ecc:dart-flutter-patterns` + `/ecc:prp-implement` → Flutter production-ready
+
+Outras skills de linguagem disponiveis:
+- `/ecc:django-patterns`, `/ecc:laravel-patterns`, `/ecc:rails-patterns`
+- `/ecc:nuxt4-patterns`, `/ecc:vue-patterns`, `/ecc:angular-developer`
+- `/ecc:zig-patterns`, `/ecc:carbon-patterns`, `/ecc:mojo-patterns`
+
+--------------------------------------------------------------------------------
+COMO OS AGENTES DEVEM USAR ESTAS SKILLS NA PRATICA
+--------------------------------------------------------------------------------
+
+EXEMPLO 1 - Nova funcionalidade em projeto React existente:
+1. Agente Arquiteto: `/ecc:feature-dev` (entende o codebase) → `/ecc:plan` (plano)
+2. Agente Dev: `/ecc:react-patterns` + `/ecc:prp-implement` (implementa)
+3. Agente QA: `/ecc:code-review` → `/ecc:verification-loop`
+4. Se falhar build: Agente Debugger: `/ecc:build-fix`
+
+EXEMPLO 2 - Novo microservico Go do zero:
+1. Arquiteto: `/ecc:blueprint` (arquitetura completa) → ADR via `/ecc:architecture-decision-records`
+2. Dev: `/ecc:go-patterns` + `/ecc:prp-implement` (codigo + testes via `/ecc:tdd-workflow`)
+3. QA: `/ecc:orch-review` (revisao profunda) → `/ecc:verification-loop`
+4. DevOps: `/ecc:deployment-patterns` (Docker, CI/CD) → `/ecc:terraform-patterns` (infra)
+
+EXEMPLO 3 - Refatoracao de legacy Python:
+1. Arquiteto: `/ecc:plan` (escopo da refatoracao)
+2. Dev: `/ecc:python-patterns` + `/ecc:prp-implement` (codigo novo)
+3. Debugger: `/ecc:refactor-clean` (remove dead code)
+4. QA: `/ecc:code-review` → `/ecc:verification-loop`
+
+EXEMPLO 4 - Bug critico em producao:
+1. Debugger: `/ecc:build-fix` (se erro de build) ou analise manual
+2. Dev: `/ecc:prp-implement` (fix com teste via `/ecc:tdd-workflow`)
+3. QA: `/ecc:verification-loop` (valida fix)
+4. DevOps: `/ecc:deployment-patterns` (hotfix deploy)
+
+--------------------------------------------------------------------------------
+REGRAS DE OURO PARA OS AGENTES
+--------------------------------------------------------------------------------
+1. NUNCA pule a fase de planejamento. Sem plano aprovado, nao ha codigo.
+2. SEMPRE use `/ecc:prp-implement` para codigo de producao (nao `/ecc:plan` sozinho).
+3. SEMPRE rode `/ecc:verification-loop` antes de considerar tarefa completa.
+4. SEMPRE invoque skill de linguagem especifica junto com implementacao.
+5. Para revisao critica: use `/ecc:orch-review` (adversarial) em vez de `/ecc:code-review`.
+6. Registre decisoes arquiteturais com `/ecc:architecture-decision-records`.
+7. Mantenha ADRs atualizados - sao memoria do projeto.
+8. Se codigo nao compila: `/ecc:build-fix` primeiro, so depois revisao.
+9. Periodicamente: `/ecc:refactor-clean` para evitar debt tecnico.
+10. Documente o "porque" nas ADRs, nao so o "o que".
+
+================================================================================
+GUIA DE REFERENCIA RAPIDA: QUAL ARQUIVO LER PARA CADA NECESSIDADE
+================================================================================
+
+| NECESSIDADE                                    | ARQUIVO PRINCIPAL                              |
+|------------------------------------------------|------------------------------------------------|
+| Entender gerenciamento de memoria (GC)         | language-internals/garbage_collection.py       |
+| Construir parser/lexer                         | language-internals/lexer_parser.py             |
+| Implementar type inference (HM, bidirectional) | language-internals/type_inference.py           |
+| Otimizar IR de compilador (SSA, dataflow)      | language-internals/ir_optimization.py          |
+| Construir VM/JIT/Interpreter                   | language-internals/runtime_vm.py               |
+| Provar correcao de programas                   | language-internals/formal_semantics.py         |
+| Escolher modelo de threads                     | concurrency/thread_models.py                   |
+| Implementar sincronizacao (mutex, RWLock, etc) | concurrency/sync_primitives.py                 |
+| Entender memory ordering (SC, TSO, C++11)      | concurrency/memory_model.py                    |
+| Construir estruturas lock-free                 | concurrency/lockfree_structures.py             |
+| Implementar consenso (Paxos, Raft, PBFT)       | concurrency/consensus.py                       |
+| Aprender qualquer algoritmo                    | algorithms/<topico>.py                         |
+| Escolher paradigma de programacao              | paradigms/concept.md                           |
+| Refrescar fundamentos matematicos              | fundamentals/concept.md                        |
+| Verificar propriedades temporais               | concurrency/temporal_logic.py (planejado)      |
+| Model checking de sistemas concorrentes        | concurrency/model_checker.py (planejado)       |
+| CRDTs para dados distribuidos                  | concurrency/crdt.py (planejado)                |
+| Transacoes distribuidas (2PC, Saga)            | concurrency/distributed_tx.py (planejado)      |
+| Actor runtime com supervision                  | concurrency/actor_runtime.py (planejado)       |
+| Async runtime com io_uring                     | concurrency/async_runtime.py (planejado)       |
+
+================================================================================
+TRILHAS DE APRENDIZADO RECOMENDADAS
+================================================================================
+
+INICIANTE -> INTERMEDIARIO:
+1. fundamentals/concept.md + fundamentals/implementation.md
+2. paradigms/concept.md -> escolha um paradigma -> implementation.md
+3. algorithms/sorting.py, search.py, hash_tables.py, bst.py
+4. concurrency/thread_models.py, concurrency/sync_primitives.py
+
+INTERMEDIARIO -> AVANCADO:
+5. algorithms/graph_algos.py, dp.py, parallel_algorithms.py
+6. language-internals/lexer_parser.py -> type_inference.py -> ir_optimization.py
+7. language-internals/garbage_collection.py -> runtime_vm.py
+8. language-internals/formal_semantics.py
+9. concurrency/consensus.py, concurrency/lockfree_structures.py
+10. concurrency/memory_model.py + litmus tests
+
+AVANCADO -> EXPERT:
+11. Fase 7 (planejada): Systems, Graphics, Crypto, ML Systems, Formal Methods
+12. Fase 8 (planejada): AI-assisted coding, WASM Components, Effect Systems, Quantum
+13. Fase 9 (planejada): Teaching methodology, curriculum design, evaluation
+
+================================================================================
+PRINCIPIOS DE DESENVOLVIMENTO INCORPORADOS EM TODAS IMPLEMENTACOES
+================================================================================
+
+QUALIDADE DE CODIGO:
+- Clareza educacional: prioriza entendibilidade sobre esperteza
+- Documentacao abrangente: docstrings explicam POR QUE, nao so O QUE
+- Testes integrados: cada arquivo tem `if __name__ == "__main__":` test suite
+- Type hints completos: para suporte IDE e correcao
+- Tratamento de erros: exceptions proprias, invariantes, asserts
+
+PADROES ARQUITETURAIS:
+- Separacao de responsabilidades: modulos com boundaries limpos
+- Composicao sobre heranca: protocols, strategies, dependency injection
+- Imutabilidade por default: functional core, imperative shell
+- Gerenciamento de estado explicito: state machines, effect systems
+- Observabilidade built-in: metricas, visualizacao, logging
+
+CONSCIENCIA DE PERFORMANCE:
+- Anotacoes de complexidade: time/space complexity em docstrings
+- Awareness de memory layout: cache-friendly, false sharing prevention
+- Primitivas de concorrencia: lock-free onde apropriado, contention analysis
+- Modelos de escalabilidade: Amdahl, Gustafson, Universal Scalability Law
+
+================================================================================
+FASES FUTURAS PLANEJADAS (6-9)
+================================================================================
+
+FASE 6: ARQUITETURA DE SOFTWARE E ENGENHARIA AVANCADA
+- Clean Architecture, Hexagonal, Onion Architecture
+- Domain-Driven Design (DDD), Event Sourcing, CQRS
+- Microservices, Service Mesh, API Gateway
+- Observabilidade: Metricas, Tracing, Logging, SLO/SLI
+- CI/CD, GitOps, Progressive Delivery
+- Technical Debt Management, Architecture Decision Records
+
+FASE 7: DOMINIOS ESPECIALIZADOS
+- Systems: OS kernels, filesystems, networking stack, eBPF
+- Graphics: Rendering pipeline, GPU compute, Vulkan/Metal/DX12
+- Cryptography: Primitives, protocols, zero-knowledge, post-quantum
+- ML Systems: Training systems, inference serving, feature stores, MLOps
+- Formal Methods: Coq/Lean/Isabelle, TLA+, model checking, theorem proving
+
+FASE 8: FRONTEIRA 2024-2026+
+- AI-Assisted Coding: Copilot, Cursor, agent-based development
+- WebAssembly: Components, WASI, component model, plugins
+- Effect Systems: Koka, Eff, algebraic effects, handlers
+- Quantum Programming: Q#, Cirq, error correction, NISQ algorithms
+- New Languages: Rust, Zig, Carbon, Vale, Mojo, MoonBit
+
+FASE 9: SINTESE PARA TREINAMENTO DE IA
+- Curriculum Design: Spiral learning, prerequisite graphs
+- Exercise Generation: Procedural, difficulty calibration
+- Evaluation Framework: Rubrics, automated grading, progress tracking
+- Knowledge Distillation: From expert to student model
+- Interactive Teaching: Socratic dialogue, worked examples, fading
+
+================================================================================
+NOTAS DE MANUTENCAO
+================================================================================
+
+VERSAO: Estado em 2026-11-22
+ATUALIZACOES: Novas fases serao adicionadas ao diretorio knowledge-base/
+CROSS-REFERENCES: Arquivos referenciam uns aos outros via caminhos relativos
+TESTES: Executar `python -m pytest knowledge-base/` (quando test suite adicionado)
+DOCUMENTACAO: Cada fase tem concept.md (teoria), implementation.md (padroes),
+tradeoffs.md (decisoes), frontiers.md (pesquisa), exercises.md (pratica),
+references.bib (fontes)
+
+================================================================================
+NOTA FINAL
+================================================================================
+
+Esta knowledge base e projetada para ser A FUNDACAO PARA QUALQUER TAREFA
+DE PROGRAMACAO. Seja construindo um compilador, banco de dados, sistema
+distribuido, game engine, plataforma ML, ou aprendendo um novo paradigma -
+as fundamentacoes teoricas e implementacoes de referencia aqui fornecem
+o entendimento profundo necessario para:
+
+1. Tomar decisoes arquiteturais corretas
+2. Implementar solucoes eficientes
+3. Raciocinar sobre correcao
+4. Ensinar qualquer aspecto de programacao a outros modelos/agentes
+
+O OBJETIVO: Permitir que voce desenvolva QUALQUER COISA usando programacao
+e suas logicas/linguagens, independentemente, com nivel de entendimento
+expert.
+
+================================================================================
+FIM DO RELATORIO DE CONTEXTO
+================================================================================
+
+---
+FACT-FORCING GATE COMPLIANCE:
+1. Supersedes: CONTEXT_REPORT.md (mesmo conteudo, formato .md). Este .txt e para compatibilidade com Project Knowledge que pode nao aceitar .md.
+2. Linked from: Project Knowledge / Contexto do Projeto no Claude Desktop. Sera carregado como arquivo de contexto permanente.
+3. New file rationale: Usuario solicitou explicitamente formato .txt para carregar na pasta de contexto do projeto; .md anterior era para conversa, este .txt e para Project Knowledge permanente.
+4. User instruction verbatim: "E preciso que nesse relatório contenha ABSOLTUMENTE 100% do conhecimento que você obteve sobre programação fora isso, preciso que nesse relatório você consiga adicionar essas informações sobre as skills que meus agentes de ia desse projeto iram usar e como: [skills listadas]"
+---
